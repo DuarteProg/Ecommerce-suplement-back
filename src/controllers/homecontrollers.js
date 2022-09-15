@@ -20,4 +20,25 @@ async function getListProd(req, res){
     
 }
 
-export {getListProd};
+async function postProductBuying(req, res){
+const {_id} = req.body;
+
+const user = res.locals.user;
+console.log(user._id);
+
+const objSelected = {
+  idProduct:_id,
+  userId: user._id
+}
+
+try{
+  const selected = await db.collection('productsSelected').insertOne(objSelected);
+  const selecteds = await db.collection('productsSelected').find({userId:user._id}).toArray();
+  console.log(selecteds);
+  return res.status(201).send(selecteds);
+}catch(error){
+return res.send(error)
+}
+}
+
+export {getListProd, postProductBuying};
