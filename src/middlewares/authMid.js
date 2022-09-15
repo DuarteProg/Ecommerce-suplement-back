@@ -1,5 +1,5 @@
 import db from '../db.js'
-
+//comentando
 export async function midauth(req,res,next){
 const {authorization} = req.headers;
 const token = authorization?.replace('Bearer ',"");
