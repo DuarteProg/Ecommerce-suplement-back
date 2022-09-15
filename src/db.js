@@ -10,7 +10,7 @@ try {
   await cliente.connect();
   db = cliente.db("api-prosupps")
 } catch (error) {
-  
+  console.log(error)
 }
 
 export default db;
