@@ -2,6 +2,7 @@ import db from '../db.js'
 import { listProducts } from '../listprodutcs.js';
 
 
+
 async function getListProd(req, res){
   
     try{
@@ -34,23 +35,27 @@ async function getListProd(req, res){
 
 
 async function postProductBuying(req, res){
-const {_id, img, name, description} = req.body;
+const {_id, img, value, name, description} = req.body;
 
 const user = res.locals.user;
-
+// console.log(user._id);
 
 const objSelected = {
   idProduct:_id,
-  img,
-  name,
-  description,
-  userId: user._id
+  userId: user._id,
+  description: description,
+  name: name, 
+  value: value,
+  img: img
+
+
 }
 
 try{
   const selected = await db.collection('productsSelected').insertOne(objSelected);
   const selecteds = await db.collection('productsSelected').find({userId:user._id}).toArray();
-  console.log(selecteds);
+  // console.log(selecteds);
+
   return res.status(201).send(selecteds);
 }catch(error){
 return res.send(error)
