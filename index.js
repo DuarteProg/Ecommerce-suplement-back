@@ -24,6 +24,6 @@ server.delete("/delete", deleteSelected)
 //Rotas Menu
 server.use(routesHome);
 
-server.listen(5000, () => {
+server.listen(PORT, () => {
   console.log(`Servidor funcionandona na porta ${PORT}`);
 });
